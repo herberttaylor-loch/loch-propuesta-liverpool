@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lōch — Dijes & Pulseras · Matriz de Precios</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F3E7DF;--black:#0D0D0D;--white:#FFFFFF;--gold:#B8975A;--gray:#888;--border:rgba(13,13,13,0.10);--red:#8B2020;--green:#1a5c2a;--blue:#1a3a6b;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--cream);color:var(--black);font-family:'Montserrat',sans-serif;font-weight:400;font-size:13px;line-height:1.6;}
+.page{max-width:1280px;margin:0 auto;padding:0 40px 80px;}
+h1,h2,h3{font-family:'Playfair Display','Didot','Georgia',serif;font-weight:400;}
+.caps{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray);font-family:'Montserrat',sans-serif;}
+
+/* HEADER */
+.header{display:flex;justify-content:space-between;align-items:flex-end;padding:48px 0 32px;border-bottom:1px solid var(--border);margin-bottom:48px;}
+.brand h1{font-size:40px;letter-spacing:7px;font-style:italic;line-height:1;margin-bottom:5px;}
+.brand .tagline{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);font-weight:300;}
+.hdr-meta{text-align:right;font-size:11px;color:var(--gray);font-weight:300;line-height:2;}
+.hdr-meta strong{color:var(--black);font-weight:500;}
+
+/* NAV TABS */
+.nav-tabs{display:flex;gap:1px;margin-bottom:0;background:var(--border);}
+.nav-tab{flex:1;padding:14px 20px;text-align:center;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;border:none;background:var(--cream);color:var(--gray);cursor:pointer;transition:all .2s;}
+.nav-tab.on{background:var(--black);color:var(--white);}
+.nav-tab:hover:not(.on){background:rgba(13,13,13,.06);}
+.tab-panel{display:none;}
+.tab-panel.on{display:block;}
+
+/* CONTROLS */
+.controls{background:var(--white);border:1px solid var(--border);padding:20px 26px;display:flex;gap:22px;align-items:flex-end;flex-wrap:wrap;margin-bottom:24px;}
+.cg{display:flex;flex-direction:column;gap:7px;}
+.cg label{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gray);}
+.trow{display:flex;gap:1px;}
+.tbtn{padding:7px 14px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:500;letter-spacing:1px;border:1px solid var(--border);background:var(--cream);color:var(--black);cursor:pointer;transition:all .2s;}
+.tbtn:first-child{border-radius:1px 0 0 1px;}
+.tbtn:last-child{border-radius:0 1px 1px 0;}
+.tbtn.on{background:var(--black);color:var(--white);border-color:var(--black);}
+.tbtn:hover:not(.on){background:rgba(13,13,13,.06);}
+.slider-cg{display:flex;flex-direction:column;gap:7px;min-width:170px;}
+.srow{display:flex;align-items:center;gap:8px;}
+.srow input[type=range]{flex:1;accent-color:var(--black);height:3px;}
+.slbl{font-family:'Playfair Display',serif;font-size:17px;min-width:44px;text-align:right;}
+.reveal-btn{padding:8px 18px;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;border:1px solid var(--border);background:var(--cream);color:var(--gray);cursor:pointer;border-radius:1px;transition:all .2s;}
+.reveal-btn.on{background:var(--black);color:var(--white);border-color:var(--black);}
+
+/* SECTION */
+.section{margin-bottom:52px;}
+.section-head{margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.section-head h2{font-size:22px;letter-spacing:1px;margin-bottom:3px;}
+
+/* MATRIX TABLE */
+.matrix-wrap{overflow-x:auto;}
+table.mx{width:100%;border-collapse:collapse;}
+table.mx thead tr{border-bottom:2px solid var(--black);}
+table.mx th{font-family:'Montserrat',sans-serif;font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gray);padding:10px 7px;text-align:center;white-space:nowrap;}
+table.mx th.th-l{text-align:left;min-width:160px;}
+table.mx th.th-sub{font-size:7px;letter-spacing:1px;color:var(--gray);font-weight:400;padding-top:2px;}
+table.mx td{padding:0 5px;border-bottom:1px solid var(--border);text-align:center;vertical-align:middle;}
+table.mx td.td-l{text-align:left;padding:8px 5px;}
+table.mx tbody tr:hover{background:rgba(243,231,223,.4);}
+table.mx thead tr.subhead th{background:rgba(243,231,223,.5);font-size:7px;letter-spacing:1px;color:var(--gray);padding:5px 7px;font-weight:500;border-bottom:1px solid var(--border);}
+
+/* MODEL INFO */
+.mi{display:flex;flex-direction:column;justify-content:center;padding:8px 4px;}
+.mn{font-family:'Playfair Display',serif;font-size:15px;font-style:italic;margin-bottom:2px;}
+.md{font-size:9px;color:var(--gray);line-height:1.4;}
+.ms{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-top:2px;font-weight:600;}
+
+/* PRICE CELL */
+.pcc{padding:5px 4px !important;}
+.pci{background:rgba(255,255,255,.7);border-radius:1px;padding:7px 5px;}
+.pcpp{font-family:'Playfair Display',serif;font-size:12px;margin-bottom:2px;}
+.pcsub{font-size:7.5px;color:var(--gray);line-height:1.6;}
+.pcsub .r{color:var(--red);}
+.pcsub .g{color:var(--green);font-weight:600;}
+.pcsub .b{color:var(--blue);}
+.pcsub .bld{color:var(--black);font-weight:600;}
+.pcsub .dim{font-size:7px;}
+
+/* CHAIN COST NOTE */
+.chain-note{background:var(--white);border:1px solid var(--border);padding:12px 18px;margin-bottom:16px;font-size:11px;color:var(--gray);line-height:1.7;}
+.chain-note strong{color:var(--black);}
+.chain-badges{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
+.chain-badge{background:var(--cream);border:1px solid var(--border);border-radius:1px;padding:5px 12px;font-size:10px;}
+.chain-badge span{font-family:'Playfair Display',serif;font-size:13px;margin-left:6px;}
+
+/* FLUJO */
+.flujo-mini{background:var(--white);border:1px solid var(--border);padding:20px 24px;margin-bottom:20px;display:flex;gap:0;border-radius:1px;}
+.fm-step{flex:1;padding:12px 8px;text-align:center;border-right:1px solid var(--border);}
+.fm-step:last-child{border-right:none;}
+.fm-lbl{font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:7px;font-weight:600;line-height:1.4;}
+.fm-val{font-family:'Playfair Display',serif;font-size:18px;}
+.fm-pct{font-size:8px;color:var(--gray);margin-top:3px;}
+.fm-step.origin{background:var(--cream);}
+.fm-step.ded .fm-val{color:var(--red);}
+.fm-step.res{background:var(--black);}
+.fm-step.res .fm-lbl{color:rgba(255,255,255,.45);}
+.fm-step.res .fm-val{color:var(--white);}
+.fm-step.res .fm-pct{color:rgba(255,255,255,.4);}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="header">
+  <div class="brand">
+    <h1>Lōch</h1>
+    <div class="tagline">Interactive Jewelry · Diamantes de Laboratorio</div>
+  </div>
+  <div class="hdr-meta">
+    <div><strong>Matriz de Precios</strong></div>
+    <div>Dijes · Pulseras</div>
+    <div>14k & 18k · Diamantes IGI</div>
+  </div>
+</header>
+
+<!-- NAV -->
+<div class="nav-tabs">
+  <button class="nav-tab on" onclick="showTab('dijes',this)">💎 Dijes / Collares</button>
+  <button class="nav-tab" onclick="showTab('pulseras',this)">✨ Pulseras</button>
+</div>
+
+<!-- SHARED CONTROLS -->
+<div class="controls">
+  <div class="cg">
+    <label>Precio</label>
+    <div class="trow">
+      <button class="tbtn on" onclick="setIva(false,this)">Sin IVA</button>
+      <button class="tbtn" onclick="setIva(true,this)">Con IVA</button>
+    </div>
+  </div>
+  <div class="cg">
+    <label>Kilataje</label>
+    <div class="trow">
+      <button class="tbtn on" onclick="setKilate('14k',this)">14k</button>
+      <button class="tbtn" onclick="setKilate('18k',this)">18k</button>
+    </div>
+  </div>
+  <div class="slider-cg">
+    <label>Bonificación: <span id="bono-lbl" style="color:var(--black)">19.0%</span></label>
+    <div class="srow">
+      <span style="font-size:9px;color:var(--gray)">12%</span>
+      <input type="range" min="12" max="22" step="0.5" value="19" id="bono-slider" oninput="onBono(this.value)">
+      <span style="font-size:9px;color:var(--gray)">22%</span>
+      <span class="slbl" id="bono-val">19.0%</span>
+    </div>
+  </div>
+  <div class="slider-cg">
+    <label>Factoraje: <span id="fac-lbl" style="color:var(--black)">2.7%</span></label>
+    <div class="srow">
+      <span style="font-size:9px;color:var(--gray)">0%</span>
+      <input type="range" min="0" max="5" step="0.1" value="2.7" id="fac-slider" oninput="onFac(this.value)">
+      <span style="font-size:9px;color:var(--gray)">5%</span>
+      <span class="slbl" id="fac-val">2.7%</span>
+    </div>
+  </div>
+  <div class="cg">
+    <label>Márgenes internos</label>
+    <button class="reveal-btn" id="rev-btn" onclick="toggleReveal()">Mostrar</button>
+  </div>
+</div>
+
+<!-- FLUJO MINI -->
+<div class="flujo-mini" id="flujo-mini"></div>
+
+<!-- ══════════ TAB: DIJES ══════════ -->
+<div class="tab-panel on" id="tab-dijes">
+
+  <div style="margin-bottom:32px">
+    <div class="section-head">
+      <div class="caps">Dijes · Collares</div>
+      <h2>Montadura + Cadena + Diamante</h2>
+    </div>
+    <div style="font-size:11px;color:var(--gray);margin-bottom:16px">
+      Selecciona montadura, tipo de cadena y rango de diamante. Los precios incluyen el costo de la cadena seleccionada.
+    </div>
+
+    <!-- Cadena selector -->
+    <div class="chain-note">
+      <strong>Tipo de cadena incluida en el precio:</strong>
+      <div class="chain-badges">
+        <div class="chain-badge">Hilo (45–55cm)<span id="dij-hilo-pp">$2,422</span></div>
+        <div class="chain-badge">Cadena (45–55cm)<span id="dij-cadena-pp">$8,111</span></div>
+        <div class="chain-badge">Hilo+Cadena (50/50)<span id="dij-combo-pp">$5,267</span></div>
+      </div>
+      <div style="margin-top:10px;font-size:10px">Cadena activa:
+        <div class="trow" style="display:inline-flex;margin-left:8px">
+          <button class="tbtn on" style="padding:4px 10px;font-size:9px" onclick="setChainDij('hilo',this)">Hilo</button>
+          <button class="tbtn" style="padding:4px 10px;font-size:9px" onclick="setChainDij('cadena',this)">Cadena</button>
+          <button class="tbtn" style="padding:4px 10px;font-size:9px" onclick="setChainDij('combo',this)">Hilo+Cadena</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-wrap">
+      <table class="mx" id="dij-table">
+        <thead>
+          <tr>
+            <th class="th-l" rowspan="2">Montadura</th>
+            <th colspan="3">0.30–0.49 ct</th>
+            <th colspan="3">0.50–0.99 ct</th>
+            <th colspan="3">1.00–1.49 ct</th>
+            <th colspan="3">1.50–1.99 ct</th>
+            <th colspan="3">2.00–2.49 ct</th>
+            <th colspan="3">2.50+ ct</th>
+          </tr>
+          <tr class="subhead">
+            <th>PP</th><th>Factura</th><th>Neto</th>
+            <th>PP</th><th>Factura</th><th>Neto</th>
+            <th>PP</th><th>Factura</th><th>Neto</th>
+            <th>PP</th><th>Factura</th><th>Neto</th>
+            <th>PP</th><th>Factura</th><th>Neto</th>
+            <th>PP</th><th>Factura</th><th>Neto</th>
+          </tr>
+        </thead>
+        <tbody id="dij-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ TAB: PULSERAS ══════════ -->
+<div class="tab-panel" id="tab-pulseras">
+
+  <div style="margin-bottom:32px">
+    <div class="section-head">
+      <div class="caps">Pulseras</div>
+      <h2>Modelo + Cadena + Diamante</h2>
+    </div>
+    <div style="font-size:11px;color:var(--gray);margin-bottom:16px">
+      Los modelos Georgia, Artemisia, Camille y Frida requieren 1 piedra principal. Leonora requiere 2 piedras. Tamara no requiere piedra central (40 stones laterales incluidos).
+    </div>
+
+    <!-- Cadena selector -->
+    <div class="chain-note">
+      <strong>Tipo de cadena / brazalete:</strong>
+      <div class="chain-badges">
+        <div class="chain-badge">Hilo<span id="pul-hilo-pp">$692</span></div>
+        <div class="chain-badge">Cadena<span id="pul-cadena-pp">$8,111</span></div>
+        <div class="chain-badge">Hilo+Cadena<span id="pul-combo-pp">$4,319</span></div>
+      </div>
+      <div style="margin-top:10px;font-size:10px">Cadena activa:
+        <div class="trow" style="display:inline-flex;margin-left:8px">
+          <button class="tbtn on" style="padding:4px 10px;font-size:9px" onclick="setChainPul('hilo',this)">Hilo</button>
+          <button class="tbtn" style="padding:4px 10px;font-size:9px" onclick="setChainPul('cadena',this)">Cadena</button>
+          <button class="tbtn" style="padding:4px 10px;font-size:9px" onclick="setChainPul('combo',this)">Hilo+Cadena</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-wrap">
+      <table class="mx" id="pul-table">
+        <thead>
+          <tr>
+            <th class="th-l" rowspan="2">Modelo</th>
+            <th colspan="3">0.30–0.49 ct</th>
+            <th colspan="3">0.50–0.99 ct</th>
+            <th colspan="3">1.00–1.49 ct</th>
+            <th colspan="3">1.50–1.99 ct</th>
+            <th colspan="3">2.00–2.49 ct</th>
+            <th colspan="3">Sin piedra / fijo</th>
+          </tr>
+          <tr class="subhead">
+            <th>PP</th><th>Factura</th><th>Neto</th>
+            <th>PP</th><th>Factura</th><th>Neto</th>
+            <th>PP</th><th>Factura</th><th>Neto</th>
+            <th>PP</th><th>Factura</th><th>Neto</th>
+            <th>PP</th><th>Factura</th><th>Neto</th>
+            <th>PP</th><th>Factura</th><th>Neto</th>
+          </tr>
+        </thead>
+        <tbody id="pul-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- /page -->
+
+<script>
+const IVA=1.16, LIV=0.45, PUB=0.02;
+let showIva=false, kilate='14k', bono=0.19, fac=0.027, revealed=false;
+let chainDij='hilo', chainPul='hilo';
+
+// ── COSTS FROM SPREADSHEET ──
+// Dijes: Romina (solitario), Tania (halo), Nadia (bisel)
+// Costs: "Costo Total Anillo" field from sheet (production cost)
+const DIJ_MONTURAS = [
+  {name:'Romina', style:'Solitario · 4 uñas canasta', ca14:1234, ca18:1234, needsPiedra:true},
+  {name:'Tania',  style:'Halo · Montadura pavé',      ca14:4619, ca18:4619, needsPiedra:true},
+  {name:'Nadia',  style:'Solitario · Bisel',          ca14:2318, ca18:2318, needsPiedra:true},
+];
+// Chains for dijes (PP sin IVA from sheet)
+const DIJ_CHAINS = {
+  hilo:   {name:'Hilo',        ca14:692,  ca18:692},
+  cadena: {name:'Cadena',      ca14:8111, ca18:8111},
+  combo:  {name:'Hilo+Cadena', ca14:4319, ca18:4319},
+};
+
+// Pulseras: Georgia, Artemisia, Camille, Frida (1 piedra), Leonora (2 piedras), Tamara (sin piedra)
+const PUL_MODELS = [
+  {name:'Georgia',   style:'Solitario · 4 uñas canasta', ca14:1234, ca18:1234, piedras:1},
+  {name:'Artemisia', style:'Halo · montadura pavé',      ca14:4619, ca18:4619, piedras:1},
+  {name:'Camille',   style:'Solitario · Bisel',          ca14:2318, ca18:2318, piedras:1},
+  {name:'Frida',     style:'Toi et moi · 2 canastas',    ca14:5569, ca18:5569, piedras:2},
+  {name:'Leonora',   style:'Cluster · multi-stone',      ca14:10128,ca18:10128,piedras:2},
+  {name:'Tamara',    style:'Solitario · 40 stones lat.', ca14:10183,ca18:10183,piedras:0},
+];
+// Chains for pulseras
+const PUL_CHAINS = {
+  hilo:   {name:'Hilo',        ca14:692,  ca18:692},
+  cadena: {name:'Cadena',      ca14:8111, ca18:8111},
+  combo:  {name:'Hilo+Cadena', ca14:4319, ca18:4319},
+};
+
+// Diamond cost ranges (real inventory avg costs MXN)
+const DIAM_RANGES = [
+  {label:'0.30–0.49 ct', cost:900},
+  {label:'0.50–0.99 ct', cost:1700},
+  {label:'1.00–1.49 ct', cost:3500},
+  {label:'1.50–1.99 ct', cost:5500},
+  {label:'2.00–2.49 ct', cost:7500},
+  {label:'2.50+ ct',     cost:11000},
+];
+
+function fmt(n){return'$'+Math.round(n).toLocaleString('es-MX');}
+function p1(n){return n.toFixed(1)+'%';}
+
+function calcNeto(pp_sin){
+  const f=pp_sin*(1-LIV);
+  return{factura:f, cf:f*fac, cb:f*bono, cp:f*PUB, neto:f-f*fac-f*bono-f*PUB};
+}
+
+function calcPP(ca_total, diam_cost, fa=3.5, fd=4.5){
+  return ca_total*fa + diam_cost*fd;
+}
+
+function onBono(v){bono=+v/100;const l=parseFloat(v).toFixed(1)+'%';document.getElementById('bono-lbl').textContent=l;document.getElementById('bono-val').textContent=l;renderAll();}
+function onFac(v){fac=+v/100;const l=parseFloat(v).toFixed(1)+'%';document.getElementById('fac-lbl').textContent=l;document.getElementById('fac-val').textContent=l;renderAll();}
+function setIva(val,btn){showIva=val;btn.parentElement.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderAll();}
+function setKilate(k,btn){kilate=k;btn.parentElement.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderAll();}
+function toggleReveal(){revealed=!revealed;const btn=document.getElementById('rev-btn');btn.classList.toggle('on',revealed);btn.textContent=revealed?'Ocultar':'Mostrar';renderAll();}
+function setChainDij(c,btn){chainDij=c;btn.parentElement.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderDijes();}
+function setChainPul(c,btn){chainPul=c;btn.parentElement.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderPulseras();}
+function showTab(t,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById('tab-'+t).classList.add('on');
+  btn.classList.add('on');
+}
+
+// FLUJO
+function renderFlujo(){
+  const r=calcNeto(100);
+  document.getElementById('flujo-mini').innerHTML=
+    `<div class="fm-step origin"><div class="fm-lbl">PP sin IVA</div><div class="fm-val">$100</div></div>`+
+    `<div class="fm-step"><div class="fm-lbl">Factura Liverpool (${Math.round((1-LIV)*100)}%)</div><div class="fm-val">${fmt(r.factura)}</div><div class="fm-pct">${p1(r.factura)} del PP</div></div>`+
+    `<div class="fm-step ded"><div class="fm-lbl">Factoraje ${(fac*100).toFixed(1)}%</div><div class="fm-val">−${fmt(r.cf)}</div></div>`+
+    `<div class="fm-step ded"><div class="fm-lbl">Bono ${(bono*100).toFixed(1)}%</div><div class="fm-val">−${fmt(r.cb)}</div></div>`+
+    `<div class="fm-step ded"><div class="fm-lbl">Publicidad 2%</div><div class="fm-val">−${fmt(r.cp)}</div></div>`+
+    `<div class="fm-step res"><div class="fm-lbl">Neto Lōch</div><div class="fm-val">${fmt(r.neto)}</div><div class="fm-pct">${p1(r.neto)} del PP</div></div>`;
+}
+
+// CELL BUILDER
+function buildCell(pp_sin, ca_total, diam_cost){
+  const pd=showIva?pp_sin*IVA:pp_sin;
+  const r=calcNeto(pp_sin);
+  const cr=ca_total+diam_cost;
+  const util=r.neto-cr;
+  const mg=util/pp_sin*100;
+  let sub=`<span class="b">${fmt(r.factura)}</span><span class="r">−bono,pub,fac</span><span class="g">${fmt(r.neto)}</span>`;
+  if(revealed) sub+=`<span class="r">−${fmt(cr)}</span><span class="bld">${fmt(util)} util</span><span class="dim">${p1(mg)}/PP</span>`;
+  return `<td class="pcc"><div class="pci"><div class="pcpp">${fmt(pd)}</div><div class="pcsub">${sub}</div></div></td>`;
+}
+
+// DIJES
+function renderDijes(){
+  const chain=DIJ_CHAINS[chainDij];
+  const chainCa=kilate==='14k'?chain.ca14:chain.ca18;
+  // Update chain badges
+  Object.entries(DIJ_CHAINS).forEach(([k,c])=>{
+    const ca=kilate==='14k'?c.ca14:c.ca18;
+    const pp=calcPP(ca,0,3.5,0);
+    document.getElementById('dij-'+k+'-pp').textContent=fmt(showIva?pp*IVA:pp);
+  });
+  let html='';
+  DIJ_MONTURAS.forEach(m=>{
+    const mCa=kilate==='14k'?m.ca14:m.ca18;
+    const totalCa=mCa+chainCa;
+    html+=`<tr><td class="td-l"><div class="mi"><div class="mn">${m.name}</div><div class="md">${m.style}</div><div class="ms">${kilate} · con ${chain.name}</div></div></td>`;
+    DIAM_RANGES.forEach(dr=>{
+      const pp_sin=calcPP(totalCa,dr.cost);
+      html+=buildCell(pp_sin, totalCa, dr.cost);
+    });
+    html+=`</tr>`;
+  });
+  document.getElementById('dij-body').innerHTML=html;
+}
+
+// PULSERAS
+function renderPulseras(){
+  const chain=PUL_CHAINS[chainPul];
+  const chainCa=kilate==='14k'?chain.ca14:chain.ca18;
+  // Update chain badges
+  Object.entries(PUL_CHAINS).forEach(([k,c])=>{
+    const ca=kilate==='14k'?c.ca14:c.ca18;
+    const pp=calcPP(ca,0,3.5,0);
+    document.getElementById('pul-'+k+'-pp').textContent=fmt(showIva?pp*IVA:pp);
+  });
+  let html='';
+  PUL_MODELS.forEach(m=>{
+    const mCa=kilate==='14k'?m.ca14:m.ca18;
+    const totalCa=mCa+chainCa;
+    html+=`<tr><td class="td-l"><div class="mi"><div class="mn">${m.name}</div><div class="md">${m.style}</div>`;
+    if(m.piedras===2) html+=`<div class="ms" style="color:var(--gold)">2 piedras · ${kilate}</div>`;
+    else if(m.piedras===0) html+=`<div class="ms" style="color:var(--gold)">Sin piedra central · ${kilate}</div>`;
+    else html+=`<div class="ms">${kilate} · con ${chain.name}</div>`;
+    html+=`</div></td>`;
+
+    DIAM_RANGES.forEach((dr,i)=>{
+      if(m.piedras===0){
+        // Tamara: sin piedra central, precio fijo
+        if(i===0){
+          const pp_sin=calcPP(totalCa,0);
+          const r=calcNeto(pp_sin);
+          const pd=showIva?pp_sin*IVA:pp_sin;
+          let sub=`<span class="b">${fmt(r.factura)}</span><span class="r">−bono,pub,fac</span><span class="g">${fmt(r.neto)}</span>`;
+          if(revealed){const cr=totalCa;const util=r.neto-cr;sub+=`<span class="r">−${fmt(cr)}</span><span class="bld">${fmt(util)} util</span>`;}
+          html+=`<td class="pcc" colspan="6"><div class="pci" style="background:rgba(243,231,223,.5)"><div class="pcpp">${fmt(pd)}</div><div class="pcsub">${sub}<span class="dim">precio único · 40 stones lat.</span></div></div></td>`;
+          return;
+        } else return; // already handled with colspan
+      }
+      // Leonora: 2 piedras = diam_cost * 2
+      const diamCost=m.piedras===2?dr.cost*2:dr.cost;
+      const pp_sin=calcPP(totalCa,diamCost);
+      html+=buildCell(pp_sin, totalCa, diamCost);
+    });
+    html+=`</tr>`;
+  });
+  document.getElementById('pul-body').innerHTML=html;
+}
+
+function renderAll(){renderFlujo();renderDijes();renderPulseras();}
+renderAll();
+</script>
+</body>
+</html>

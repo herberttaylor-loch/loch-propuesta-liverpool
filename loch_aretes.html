@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lōch — Aretes · Propuesta Liverpool 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F3E7DF;--black:#0D0D0D;--white:#FFFFFF;--gold:#B8975A;--gray:#888;--border:rgba(13,13,13,0.10);--red:#8B2020;--green:#1a5c2a;--blue:#1a3a6b;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--cream);color:var(--black);font-family:'Montserrat',sans-serif;font-weight:400;font-size:13px;line-height:1.6;}
+.page{max-width:1280px;margin:0 auto;padding:0 40px 80px;}
+h1,h2,h3{font-family:'Playfair Display','Didot','Georgia',serif;font-weight:400;}
+.caps{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray);font-family:'Montserrat',sans-serif;}
+
+/* HEADER */
+.header{display:flex;justify-content:space-between;align-items:flex-end;padding:48px 0 32px;border-bottom:1px solid var(--border);margin-bottom:48px;}
+.brand h1{font-size:40px;letter-spacing:7px;font-style:italic;line-height:1;margin-bottom:5px;}
+.brand .tagline{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);font-weight:300;}
+.hdr-meta{text-align:right;font-size:11px;color:var(--gray);font-weight:300;line-height:2;}
+.hdr-meta strong{color:var(--black);font-weight:500;}
+
+/* CONTROLS */
+.controls{background:var(--white);border:1px solid var(--border);padding:20px 26px;display:flex;gap:22px;align-items:flex-end;flex-wrap:wrap;margin-bottom:28px;}
+.cg{display:flex;flex-direction:column;gap:7px;}
+.cg label{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gray);}
+.trow{display:flex;gap:1px;}
+.tbtn{padding:7px 14px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:500;letter-spacing:1px;border:1px solid var(--border);background:var(--cream);color:var(--black);cursor:pointer;transition:all .2s;}
+.tbtn:first-child{border-radius:1px 0 0 1px;}
+.tbtn:last-child{border-radius:0 1px 1px 0;}
+.tbtn.on{background:var(--black);color:var(--white);border-color:var(--black);}
+.tbtn:hover:not(.on){background:rgba(13,13,13,.06);}
+.slider-cg{display:flex;flex-direction:column;gap:7px;min-width:170px;}
+.srow{display:flex;align-items:center;gap:8px;}
+.srow input[type=range]{flex:1;accent-color:var(--black);height:3px;}
+.slbl{font-family:'Playfair Display',serif;font-size:17px;min-width:44px;text-align:right;}
+.reveal-btn{padding:8px 18px;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;border:1px solid var(--border);background:var(--cream);color:var(--gray);cursor:pointer;border-radius:1px;transition:all .2s;}
+.reveal-btn.on{background:var(--black);color:var(--white);border-color:var(--black);}
+
+/* FLUJO */
+.flujo-wrap{background:var(--white);border:1px solid var(--border);padding:24px 32px;margin-bottom:32px;}
+.fsteps{display:flex;align-items:stretch;}
+.fs{flex:1;padding:14px 8px;text-align:center;border-right:1px solid var(--border);}
+.fs:last-child{border-right:none;}
+.fs-lbl{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:8px;font-weight:600;line-height:1.5;}
+.fs-val{font-family:'Playfair Display',serif;font-size:20px;}
+.fs-pct{font-size:8px;color:var(--gray);margin-top:4px;font-weight:500;}
+.fs.origin{background:var(--cream);}
+.fs.ded .fs-val{color:var(--red);}
+.fs.result{background:var(--black);}
+.fs.result .fs-lbl{color:rgba(255,255,255,.45);}
+.fs.result .fs-val{color:var(--white);}
+.fs.result .fs-pct{color:rgba(255,255,255,.4);}
+
+/* SECTION */
+.section{margin-bottom:52px;}
+.section-head{margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.section-head h2{font-size:22px;letter-spacing:1px;margin-bottom:3px;}
+.section-intro{font-size:11px;color:var(--gray);margin-bottom:20px;line-height:1.7;}
+
+/* CARDS GRID */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:1px;}
+.card{background:var(--white);padding:0;display:flex;flex-direction:column;}
+.card-img{width:100%;aspect-ratio:1/1;background:var(--cream);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.card-img input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:2;}
+.card-img .placeholder{display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;}
+.card-img .placeholder .icon{font-size:28px;opacity:.3;}
+.card-img .placeholder .txt{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);text-align:center;line-height:1.5;}
+.card-img img.preview{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;display:none;}
+.card-img:hover{background:rgba(243,231,223,.7);}
+.card-img .upload-hint{position:absolute;bottom:8px;right:8px;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--gray);background:var(--white);padding:3px 6px;border:1px solid var(--border);opacity:0;transition:opacity .2s;}
+.card-img:hover .upload-hint{opacity:1;}
+.card-body{padding:16px 16px 14px;flex:1;display:flex;flex-direction:column;}
+.card-cat{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:4px;}
+.card-name{font-family:'Playfair Display',serif;font-size:17px;font-style:italic;margin-bottom:3px;}
+.card-desc{font-size:9px;color:var(--gray);line-height:1.5;margin-bottom:12px;flex:1;}
+.card-detail{font-size:9px;color:var(--gray);line-height:1.7;margin-bottom:10px;}
+.card-detail span{display:block;}
+.card-detail .key{font-weight:600;color:var(--black);font-size:8px;letter-spacing:1px;text-transform:uppercase;margin-top:4px;}
+.price-block{border-top:1px solid var(--border);padding-top:10px;margin-top:auto;}
+.price-row{display:flex;justify-content:space-between;align-items:baseline;padding:2px 0;font-size:10px;}
+.price-row .pl{color:var(--gray);}
+.price-row .pv{font-family:'Playfair Display',serif;font-size:13px;}
+.price-row .pv.main{font-size:16px;color:var(--black);}
+.price-row .pv.neto{color:var(--green);font-weight:600;}
+.price-row .pv.red{color:var(--red);}
+.price-row .pv.blu{color:var(--blue);}
+.hidden-price{display:none;}
+
+/* JACKET COMBINATOR */
+.combinator{background:var(--white);border:1px solid var(--border);padding:28px 32px;margin-bottom:32px;}
+.combo-title{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:4px;}
+.combo-sub{font-size:10px;color:var(--gray);margin-bottom:20px;line-height:1.6;}
+.combo-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.combo-col h3{font-family:'Playfair Display',serif;font-size:14px;font-style:italic;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.combo-selector{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+.combo-item{display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid var(--border);border-radius:1px;cursor:pointer;transition:all .2s;background:var(--cream);}
+.combo-item:hover{background:rgba(243,231,223,.7);}
+.combo-item.selected{background:var(--black);color:var(--white);border-color:var(--black);}
+.combo-item .ci-name{font-family:'Playfair Display',serif;font-size:13px;font-style:italic;flex:1;}
+.combo-item .ci-price{font-size:10px;opacity:.7;}
+.combo-result{background:var(--cream);border:1px solid var(--border);padding:16px 18px;border-radius:1px;}
+.cr-title{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);font-weight:600;margin-bottom:10px;}
+.cr-row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(13,13,13,.06);font-size:11px;}
+.cr-row:last-child{border-bottom:none;font-weight:600;font-size:13px;padding-top:8px;}
+.cr-row .cl{color:var(--gray);}
+.cr-row .cv{font-family:'Playfair Display',serif;font-size:14px;}
+.cr-row.total .cv{font-size:18px;}
+
+/* COMPATIBLE TABLE */
+.compat-wrap{overflow-x:auto;}
+table.compat{width:100%;border-collapse:collapse;font-size:11px;}
+table.compat thead tr{border-bottom:2px solid var(--black);}
+table.compat th{font-family:'Montserrat',sans-serif;font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gray);padding:10px 10px;text-align:center;white-space:nowrap;}
+table.compat th.thl{text-align:left;min-width:160px;}
+table.compat td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:center;font-size:10px;}
+table.compat td.tdl{text-align:left;}
+table.compat tbody tr:hover{background:rgba(243,231,223,.4);}
+.dot-yes{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--black);}
+.dot-no{display:inline-block;width:8px;height:8px;border-radius:50%;background:rgba(13,13,13,.1);}
+.price-cell{font-family:'Playfair Display',serif;font-size:13px;}
+.price-cell .total-price{font-size:13px;}
+.price-cell .sub-neto{font-size:9px;color:var(--green);font-weight:600;display:block;}
+.base-tag{display:inline-block;padding:2px 8px;background:var(--black);color:var(--white);font-size:8px;letter-spacing:1px;border-radius:1px;margin-bottom:4px;}
+.jacket-tag{display:inline-block;padding:2px 8px;background:var(--cream);color:var(--black);font-size:8px;letter-spacing:1px;border-radius:1px;border:1px solid var(--border);margin-bottom:4px;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="header">
+  <div class="brand">
+    <h1>Lōch</h1>
+    <div class="tagline">Interactive Jewelry · Diamantes de Laboratorio</div>
+  </div>
+  <div class="hdr-meta">
+    <div><strong>Aretes · Propuesta Liverpool 2025</strong></div>
+    <div>Bases + Jackets · Sistema Modular</div>
+    <div>Certificados IGI · Oro 14k</div>
+  </div>
+</header>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <div class="cg">
+    <label>Precio</label>
+    <div class="trow">
+      <button class="tbtn on" onclick="setIva(false,this)">Sin IVA</button>
+      <button class="tbtn" onclick="setIva(true,this)">Con IVA</button>
+    </div>
+  </div>
+  <div class="slider-cg">
+    <label>Bonificación: <span id="bono-lbl" style="color:var(--black)">19.0%</span></label>
+    <div class="srow">
+      <span style="font-size:9px;color:var(--gray)">12%</span>
+      <input type="range" min="12" max="22" step="0.5" value="19" id="bono-slider" oninput="onBono(this.value)">
+      <span style="font-size:9px;color:var(--gray)">22%</span>
+      <span class="slbl" id="bono-val">19.0%</span>
+    </div>
+  </div>
+  <div class="slider-cg">
+    <label>Factoraje: <span id="fac-lbl" style="color:var(--black)">2.7%</span></label>
+    <div class="srow">
+      <span style="font-size:9px;color:var(--gray)">0%</span>
+      <input type="range" min="0" max="5" step="0.1" value="2.7" id="fac-slider" oninput="onFac(this.value)">
+      <span style="font-size:9px;color:var(--gray)">5%</span>
+      <span class="slbl" id="fac-val">2.7%</span>
+    </div>
+  </div>
+  <div class="cg">
+    <label>Márgenes internos</label>
+    <button class="reveal-btn" id="rev-btn" onclick="toggleReveal()">Mostrar</button>
+  </div>
+</div>
+
+<!-- FLUJO -->
+<div class="flujo-wrap">
+  <div class="caps" style="margin-bottom:18px">Flujo de valor — por cada $100 PP sin IVA</div>
+  <div class="fsteps" id="flujo"></div>
+</div>
+
+<!-- SECTION 1: BASES -->
+<section class="section">
+  <div class="section-head">
+    <div class="caps">01 — Bases</div>
+    <h2>Bróqueles & Huggies</h2>
+  </div>
+  <div class="section-intro">
+    Las bases son la pieza principal del arete. Se venden en par. El cliente puede usarlas solas o combinarlas con cualquier jacket.
+    Toca el área de imagen para agregar una foto.
+  </div>
+  <div class="cards-grid" id="bases-grid"></div>
+</section>
+
+<!-- SECTION 2: JACKETS -->
+<section class="section">
+  <div class="section-head">
+    <div class="caps">02 — Jackets</div>
+    <h2>Complementos Removibles</h2>
+  </div>
+  <div class="section-intro">
+    Los jackets son piezas individuales que se combinan con las bases. Se venden por unidad (individual). Compatible con Bróqueles y/o Huggies según el modelo.
+  </div>
+  <div class="cards-grid" id="jackets-grid"></div>
+</section>
+
+<!-- SECTION 3: COMBINATOR -->
+<section class="section">
+  <div class="section-head">
+    <div class="caps">03 — Combinador</div>
+    <h2>Arma tu look</h2>
+  </div>
+  <div class="combinator">
+    <div class="combo-title">Selecciona base + jacket</div>
+    <div class="combo-sub">El sistema calcula automáticamente el precio total de la combinación, la factura a Liverpool y el neto Lōch con los parámetros comerciales activos.</div>
+    <div class="combo-grid">
+      <div>
+        <h3>Base (par)</h3>
+        <div class="combo-selector" id="combo-bases"></div>
+        <h3 style="margin-top:16px">Jacket (individual — opcional)</h3>
+        <div class="combo-selector" id="combo-jackets"></div>
+      </div>
+      <div>
+        <div class="combo-result" id="combo-result"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: TABLA COMPATIBILIDAD -->
+<section class="section">
+  <div class="section-head">
+    <div class="caps">04 — Referencia de Precios</div>
+    <h2>Tabla de Compatibilidad · Base + Jacket</h2>
+  </div>
+  <div class="section-intro">
+    Cada pieza se presenta con su precio individual. El vendedor puede combinarlas libremente.
+  </div>
+  <div class="compat-wrap">
+    <table class="compat" id="compat-table">
+      <thead>
+        <tr>
+          <th class="thl">Pieza</th>
+          <th>Tipo</th>
+          <th>Venta</th>
+          <th>PP sin IVA</th>
+          <th>PP con IVA</th>
+          <th>Factura Liv.</th>
+          <th>Neto Lōch</th>
+          <th>Compatible con</th>
+        </tr>
+      </thead>
+      <tbody id="compat-body"></tbody>
+    </table>
+  </div>
+</section>
+
+</div>
+
+<script>
+const IVA=1.16, LIV=0.45, PUB=0.02;
+let showIva=false, bono=0.19, fac=0.027, revealed=false;
+let selBase=0, selJacket=-1;
+
+// ── DATA FROM SPREADSHEET ──
+// All costs = "Costo Total" from sheet (production cost)
+// PP sin IVA = from sheet "Precio publico SIN IVA"
+
+const BASES = [
+  {
+    name:'Bróquel 0.50ct',
+    cat:'Bróquel · Par',
+    desc:'Solitario 4 uñas canasta · Diamante brillante 0.50ct total (2×0.25ct) · Certificados IGI',
+    venta:'Par',
+    ct:'0.50 ct total',
+    costo:3410,
+    pp_sheet:11936,
+    compat:['broquel','huggie'],
+    details:'0.25ct c/u · 2 piezas IGI · 4 uñas canasta',
+    placeholder_icon:'◇',
+  },
+  {
+    name:'Bróquel 1.00ct',
+    cat:'Bróquel · Par',
+    desc:'Solitario 4 uñas canasta · Diamante brillante 1.00ct total (2×0.50ct) · Certificados IGI',
+    venta:'Par',
+    ct:'1.00 ct total',
+    costo:4687,
+    pp_sheet:16405,
+    compat:['broquel','huggie'],
+    details:'0.50ct c/u · 2 piezas IGI · 4 uñas canasta',
+    placeholder_icon:'◇',
+  },
+  {
+    name:'Bróquel 1.50ct',
+    cat:'Bróquel · Par',
+    desc:'Solitario 4 uñas canasta · Diamante brillante 1.50ct total (2×0.75ct) · Certificados IGI',
+    venta:'Par',
+    ct:'1.50 ct total',
+    costo:5872,
+    pp_sheet:20553,
+    compat:['broquel','huggie'],
+    details:'0.75ct c/u · 2 piezas IGI · 4 uñas canasta',
+    placeholder_icon:'◇',
+  },
+  {
+    name:'Huggie Liso',
+    cat:'Huggie · Par',
+    desc:'Aro liso sin piedras · Cierre de palanca · Usa el hueco para combinar con jackets',
+    venta:'Par',
+    ct:'Sin diamante',
+    costo:5786,
+    pp_sheet:20251,
+    compat:['huggie'],
+    details:'Sin piedra · Aro liso · Cierre palanca',
+    placeholder_icon:'○',
+  },
+  {
+    name:'Huggie Piedras',
+    cat:'Huggie · Par',
+    desc:'Aro con pavé cola de pez · 20 diamantes 1.3mm · Acabado brillante',
+    venta:'Par',
+    ct:'20 × 1.3mm',
+    costo:5544,
+    pp_sheet:19403,
+    compat:['huggie'],
+    details:'20 diamantes laterales · Cola de pez · Aro pavé',
+    placeholder_icon:'◉',
+  },
+];
+
+const JACKETS = [
+  {
+    name:'Halo 2en1 · 0.50ct',
+    cat:'Jacket Halo · Par',
+    desc:'Halo removible para Bróquel 0.50ct · 30 diamantes 1.1mm · Se usa sobre el bróquel',
+    venta:'Par',
+    uso:'Para Bróquel 0.50ct',
+    costo:2945,
+    pp_sheet:10307,
+    compat_base:['broquel'],
+    details:'30 piedras 1.1mm · Halo 2 en 1 · Par',
+    placeholder_icon:'❋',
+  },
+  {
+    name:'Halo 2en1 · 1.00ct',
+    cat:'Jacket Halo · Par',
+    desc:'Halo removible para Bróquel 1.00ct · 31 diamantes 1.1mm',
+    venta:'Par',
+    uso:'Para Bróquel 1.00ct',
+    costo:3108,
+    pp_sheet:10878,
+    compat_base:['broquel'],
+    details:'31 piedras 1.1mm · Halo 2 en 1 · Par',
+    placeholder_icon:'❋',
+  },
+  {
+    name:'Halo 2en1 · 1.50ct',
+    cat:'Jacket Halo · Par',
+    desc:'Halo removible para Bróquel 1.50ct · 32 diamantes 1.1mm',
+    venta:'Par',
+    uso:'Para Bróquel 1.50ct',
+    costo:3164,
+    pp_sheet:11073,
+    compat_base:['broquel'],
+    details:'32 piedras 1.1mm · Halo 2 en 1 · Par',
+    placeholder_icon:'❋',
+  },
+  {
+    name:'Dije Pera+RD · Bróquel',
+    cat:'Jacket Colgante · Individual',
+    desc:'Dije colgante con pera 6×4mm + brillante RD 3.3mm · 0.55ct total · Para bróquel',
+    venta:'Individual',
+    uso:'Para Bróquel',
+    costo:2798,
+    pp_sheet:9792,
+    compat_base:['broquel'],
+    details:'Pera 6×4 + RD 3.3mm · 0.55ct · Individual',
+    placeholder_icon:'◈',
+  },
+  {
+    name:'Dije Pera+RD · Huggie',
+    cat:'Jacket Colgante · Individual',
+    desc:'Dije colgante con pera 6×4mm + brillante RD 3.3mm · 0.55ct total · Para huggie',
+    venta:'Individual',
+    uso:'Para Huggie',
+    costo:2752,
+    pp_sheet:9631,
+    compat_base:['huggie'],
+    details:'Pera 6×4 + RD 3.3mm · 0.55ct · Individual',
+    placeholder_icon:'◈',
+  },
+  {
+    name:'Dije Cadena RD+Pera · Bróquel',
+    cat:'Jacket Colgante · Individual',
+    desc:'Cadena de brillantes RD con pera 6×4 · 0.45ct + 5 RD 2.2mm · Para bróquel',
+    venta:'Individual',
+    uso:'Para Bróquel',
+    costo:2944,
+    pp_sheet:10304,
+    compat_base:['broquel'],
+    details:'Pera 6×4 + 5 RD · 0.45ct · Cadena',
+    placeholder_icon:'◈',
+  },
+  {
+    name:'Dije Cadena RD+Pera · Huggie',
+    cat:'Jacket Colgante · Individual',
+    desc:'Cadena de brillantes RD con pera 6×4 · 0.45ct + 5 RD 2.2mm · Para huggie',
+    venta:'Individual',
+    uso:'Para Huggie',
+    costo:2944,
+    pp_sheet:10304,
+    compat_base:['huggie'],
+    details:'Pera 6×4 + 5 RD · 0.45ct · Cadena',
+    placeholder_icon:'◈',
+  },
+  {
+    name:'Dije Cadena+Pera · Bróquel',
+    cat:'Jacket Colgante · Individual',
+    desc:'Cadena simple con pera 6×4 · 0.45ct · Sin brillantes en cadena · Para bróquel',
+    venta:'Individual',
+    uso:'Para Bróquel',
+    costo:2610,
+    pp_sheet:9135,
+    compat_base:['broquel'],
+    details:'Pera 6×4 · 0.45ct · Cadena simple',
+    placeholder_icon:'◈',
+  },
+  {
+    name:'Dije Cadena+Pera · Huggie',
+    cat:'Jacket Colgante · Individual',
+    desc:'Cadena simple con pera 6×4 · 0.45ct · Sin brillantes en cadena · Para huggie',
+    venta:'Individual',
+    uso:'Para Huggie',
+    costo:2610,
+    pp_sheet:9135,
+    compat_base:['huggie'],
+    details:'Pera 6×4 · 0.45ct · Cadena simple',
+    placeholder_icon:'◈',
+  },
+  {
+    name:'Dije Marquise · Bróquel',
+    cat:'Jacket Colgante · Individual',
+    desc:'Marquise 7×3.5mm · 0.35ct · Perfil elegante · Para bróquel',
+    venta:'Individual',
+    uso:'Para Bróquel',
+    costo:2202,
+    pp_sheet:7709,
+    compat_base:['broquel'],
+    details:'Marquise 7×3.5 · 0.35ct · Individual',
+    placeholder_icon:'◇',
+  },
+  {
+    name:'Dije Marquise · Huggie',
+    cat:'Jacket Colgante · Individual',
+    desc:'Marquise 7×3.6mm · 0.35ct · Perfil elegante · Para huggie',
+    venta:'Individual',
+    uso:'Para Huggie',
+    costo:2202,
+    pp_sheet:7709,
+    compat_base:['huggie'],
+    details:'Marquise 7×3.6 · 0.35ct · Individual',
+    placeholder_icon:'◇',
+  },
+  {
+    name:'Dije 3 Marquise · Bróquel',
+    cat:'Jacket Colgante · Individual',
+    desc:'Trio de marquise 7×3.5mm · 0.24ct total · 3×0.08ct · Para bróquel',
+    venta:'Individual',
+    uso:'Para Bróquel',
+    costo:1970,
+    pp_sheet:6896,
+    compat_base:['broquel'],
+    details:'3×Marquise 7×3.5 · 0.24ct total · Individual',
+    placeholder_icon:'⟡',
+  },
+  {
+    name:'Dije 3 Marquise · Huggie',
+    cat:'Jacket Colgante · Individual',
+    desc:'Trio de marquise 7×3.6mm · 0.24ct total · 3×0.08ct · Para huggie',
+    venta:'Individual',
+    uso:'Para Huggie',
+    costo:1970,
+    pp_sheet:6896,
+    compat_base:['huggie'],
+    details:'3×Marquise 7×3.6 · 0.24ct total · Individual',
+    placeholder_icon:'⟡',
+  },
+];
+
+function fmt(n){return'$'+Math.round(n).toLocaleString('es-MX');}
+function p1(n){return n.toFixed(1)+'%';}
+
+function calcNeto(pp_sin){
+  const f=pp_sin*(1-LIV);
+  return{factura:f,cf:f*fac,cb:f*bono,cp:f*PUB,neto:f-f*fac-f*bono-f*PUB};
+}
+
+function dispPP(pp_sin){return showIva?pp_sin*IVA:pp_sin;}
+
+// SLIDERS
+function onBono(v){bono=+v/100;const l=parseFloat(v).toFixed(1)+'%';['bono-lbl','bono-val'].forEach(id=>document.getElementById(id).textContent=l);renderAll();}
+function onFac(v){fac=+v/100;const l=parseFloat(v).toFixed(1)+'%';['fac-lbl','fac-val'].forEach(id=>document.getElementById(id).textContent=l);renderAll();}
+function setIva(val,btn){showIva=val;btn.parentElement.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderAll();}
+function toggleReveal(){revealed=!revealed;const btn=document.getElementById('rev-btn');btn.classList.toggle('on',revealed);btn.textContent=revealed?'Ocultar':'Mostrar';renderAll();}
+
+// FLUJO
+function renderFlujo(){
+  const r=calcNeto(100);
+  document.getElementById('flujo').innerHTML=
+    `<div class="fs origin"><div class="fs-lbl">PP sin IVA</div><div class="fs-val">$100</div></div>`+
+    `<div class="fs"><div class="fs-lbl">Factura Liverpool<br>${Math.round((1-LIV)*100)}%</div><div class="fs-val">${fmt(r.factura)}</div><div class="fs-pct">${p1(r.factura)} del PP</div></div>`+
+    `<div class="fs ded"><div class="fs-lbl">Factoraje ${(fac*100).toFixed(1)}%</div><div class="fs-val">−${fmt(r.cf)}</div></div>`+
+    `<div class="fs ded"><div class="fs-lbl">Bono ${(bono*100).toFixed(1)}%</div><div class="fs-val">−${fmt(r.cb)}</div></div>`+
+    `<div class="fs ded"><div class="fs-lbl">Publicidad 2%</div><div class="fs-val">−${fmt(r.cp)}</div></div>`+
+    `<div class="fs result"><div class="fs-lbl">Neto Lōch</div><div class="fs-val">${fmt(r.neto)}</div><div class="fs-pct">${p1(r.neto)} del PP</div></div>`;
+}
+
+// CARD BUILDER
+function buildCard(item, idx, type){
+  const r=calcNeto(item.pp_sheet);
+  const util=r.neto-item.costo;
+  const mg=util/item.pp_sheet*100;
+  const pd=dispPP(item.pp_sheet);
+
+  let priceHtml=`
+    <div class="price-row"><span class="pl">PP ${showIva?'con':'sin'} IVA</span><span class="pv main">${fmt(pd)}</span></div>
+    <div class="price-row"><span class="pl">Factura Liverpool</span><span class="pv blu">${fmt(r.factura)}</span></div>
+    <div class="price-row"><span class="pl">Neto Lōch</span><span class="pv neto">${fmt(r.neto)}</span></div>`;
+  if(revealed){
+    priceHtml+=`
+    <div class="price-row hidden-price" style="display:flex"><span class="pl">Costo producción</span><span class="pv red">${fmt(item.costo)}</span></div>
+    <div class="price-row hidden-price" style="display:flex"><span class="pl">Util. bruta</span><span class="pv">${fmt(util)}</span></div>
+    <div class="price-row hidden-price" style="display:flex"><span class="pl">Margen / PP</span><span class="pv">${p1(mg)}</span></div>`;
+  }
+
+  return `<div class="card">
+    <div class="card-img" onclick="triggerUpload(this)">
+      <input type="file" accept="image/*" onchange="previewImg(this)">
+      <div class="placeholder">
+        <div class="icon">${item.placeholder_icon}</div>
+        <div class="txt">${item.name}<br>Toca para agregar foto</div>
+      </div>
+      <img class="preview" src="" alt="">
+      <div class="upload-hint">+ Foto</div>
+    </div>
+    <div class="card-body">
+      <div class="card-cat">${item.cat}</div>
+      <div class="card-name">${item.name}</div>
+      <div class="card-desc">${item.desc}</div>
+      <div class="card-detail">
+        <span class="key">Detalles</span>
+        <span>${item.details}</span>
+        ${item.uso?`<span class="key" style="margin-top:4px">Compatible</span><span>${item.uso}</span>`:''}
+        ${item.ct?`<span class="key" style="margin-top:4px">Quilataje</span><span>${item.ct}</span>`:''}
+      </div>
+      <div class="price-block">${priceHtml}</div>
+    </div>
+  </div>`;
+}
+
+function triggerUpload(el){el.querySelector('input[type=file]').click();}
+function previewImg(input){
+  if(!input.files||!input.files[0])return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const img=input.closest('.card-img').querySelector('img.preview');
+    const ph=input.closest('.card-img').querySelector('.placeholder');
+    img.src=e.target.result;
+    img.style.display='block';
+    ph.style.display='none';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+// RENDER BASES & JACKETS
+function renderCards(){
+  document.getElementById('bases-grid').innerHTML=BASES.map((b,i)=>buildCard(b,i,'base')).join('');
+  document.getElementById('jackets-grid').innerHTML=JACKETS.map((j,i)=>buildCard(j,i,'jacket')).join('');
+}
+
+// COMBINATOR
+function renderCombinator(){
+  // Bases selector
+  document.getElementById('combo-bases').innerHTML=BASES.map((b,i)=>{
+    const r=calcNeto(b.pp_sheet);
+    return `<div class="combo-item ${i===selBase?'selected':''}" onclick="selectBase(${i})">
+      <div class="ci-name">${b.name}</div>
+      <div class="ci-price">${fmt(dispPP(b.pp_sheet))}</div>
+    </div>`;
+  }).join('');
+
+  // Jackets selector
+  document.getElementById('combo-jackets').innerHTML=
+    `<div class="combo-item ${selJacket===-1?'selected':''}" onclick="selectJacket(-1)">
+      <div class="ci-name" style="font-style:normal;font-size:11px">Sin jacket</div>
+      <div class="ci-price">—</div>
+    </div>`+
+    JACKETS.map((j,i)=>{
+      return `<div class="combo-item ${i===selJacket?'selected':''}" onclick="selectJacket(${i})">
+        <div class="ci-name">${j.name}</div>
+        <div class="ci-price">${fmt(dispPP(j.pp_sheet))}</div>
+      </div>`;
+    }).join('');
+
+  // Result
+  const base=BASES[selBase];
+  const jacket=selJacket>=0?JACKETS[selJacket]:null;
+  const rb=calcNeto(base.pp_sheet);
+  const rj=jacket?calcNeto(jacket.pp_sheet):null;
+  const ppTotal=base.pp_sheet+(jacket?jacket.pp_sheet:0);
+  const rTotal=calcNeto(ppTotal);
+  const costoTotal=base.costo+(jacket?jacket.costo:0);
+  const util=rTotal.neto-costoTotal;
+
+  let resHtml=`<div class="cr-title">Resumen de combinación</div>
+    <div class="cr-row"><span class="cl">${base.name}</span><span class="cv">${fmt(dispPP(base.pp_sheet))}</span></div>`;
+  if(jacket) resHtml+=`<div class="cr-row"><span class="cl">${jacket.name}</span><span class="cv">${fmt(dispPP(jacket.pp_sheet))}</span></div>`;
+  resHtml+=`<div class="cr-row total"><span class="cl">Total look completo</span><span class="cv">${fmt(dispPP(ppTotal))}</span></div>
+    <div style="height:1px;background:var(--border);margin:10px 0"></div>
+    <div class="cr-row"><span class="cl">Factura Liverpool</span><span class="cv" style="color:var(--blue)">${fmt(rTotal.factura)}</span></div>
+    <div class="cr-row total"><span class="cl">Neto Lōch</span><span class="cv" style="color:var(--green)">${fmt(rTotal.neto)}</span></div>`;
+  if(revealed) resHtml+=`
+    <div style="height:1px;background:var(--border);margin:10px 0"></div>
+    <div class="cr-row"><span class="cl">Costo producción</span><span class="cv" style="color:var(--red)">${fmt(costoTotal)}</span></div>
+    <div class="cr-row total"><span class="cl">Util. bruta</span><span class="cv">${fmt(util)}</span></div>`;
+
+  document.getElementById('combo-result').innerHTML=resHtml;
+}
+
+function selectBase(i){selBase=i;renderCombinator();}
+function selectJacket(i){selJacket=i;renderCombinator();}
+
+// COMPAT TABLE
+function renderCompatTable(){
+  let html='';
+  // All bases
+  BASES.forEach(b=>{
+    const r=calcNeto(b.pp_sheet);
+    const compatStr=b.compat.map(c=>c==='broquel'?'Bróqueles':'Huggies').join(' · ');
+    html+=`<tr>
+      <td class="tdl"><span class="base-tag">BASE</span><br><strong>${b.name}</strong><br><span style="font-size:9px;color:var(--gray)">${b.details}</span></td>
+      <td><span style="font-size:9px">${b.venta}</span></td>
+      <td>Par</td>
+      <td class="price-cell">${fmt(b.pp_sheet)}</td>
+      <td class="price-cell">${fmt(b.pp_sheet*IVA)}</td>
+      <td class="price-cell" style="color:var(--blue)">${fmt(r.factura)}</td>
+      <td class="price-cell"><span style="color:var(--green)">${fmt(r.neto)}</span>${revealed?`<br><span style="font-size:8px;color:var(--gray)">${p1((r.neto-b.costo)/b.pp_sheet*100)}/PP</span>`:''}</td>
+      <td style="font-size:9px;color:var(--gray)">${compatStr}</td>
+    </tr>`;
+  });
+  // Spacer
+  html+=`<tr style="height:8px;background:var(--cream)"><td colspan="8"></td></tr>`;
+  // All jackets
+  JACKETS.forEach(j=>{
+    const r=calcNeto(j.pp_sheet);
+    const compatStr=j.compat_base.map(c=>c==='broquel'?'Bróqueles':'Huggies').join(' · ');
+    html+=`<tr>
+      <td class="tdl"><span class="jacket-tag">JACKET</span><br><strong>${j.name}</strong><br><span style="font-size:9px;color:var(--gray)">${j.details}</span></td>
+      <td><span style="font-size:9px">${j.venta}</span></td>
+      <td>Individual</td>
+      <td class="price-cell">${fmt(j.pp_sheet)}</td>
+      <td class="price-cell">${fmt(j.pp_sheet*IVA)}</td>
+      <td class="price-cell" style="color:var(--blue)">${fmt(r.factura)}</td>
+      <td class="price-cell"><span style="color:var(--green)">${fmt(r.neto)}</span>${revealed?`<br><span style="font-size:8px;color:var(--gray)">${p1((r.neto-j.costo)/j.pp_sheet*100)}/PP</span>`:''}</td>
+      <td style="font-size:9px;color:var(--gray)">${compatStr}</td>
+    </tr>`;
+  });
+  document.getElementById('compat-body').innerHTML=html;
+}
+
+function renderAll(){
+  renderFlujo();
+  renderCards();
+  renderCombinator();
+  renderCompatTable();
+}
+
+renderAll();
+</script>
+</body>
+</html>
